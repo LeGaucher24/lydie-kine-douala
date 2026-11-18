@@ -3,719 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lydie Kinésithérapie • Soins à domicile à Douala</title>
-    <!-- Tailwind CSS via CDN pour un chargement rapide et un design responsive -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Police Google Fonts Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons pour des icônes médicales et UI propres -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        teal: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
-                        },
-                        orangeMoney: '#FF7900',
-                        mtnYellow: '#FFCC00',
-                        whatsapp: '#25D366',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Lydie Kinésithérapie - Douala</title>
     <style>
-        /* Personnalisation subtile de la barre de défilement */
-        ::-webkit-scrollbar {
-            width: 6px;
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --accent: #f97316;
+            --bg: #f8fafc;
+            --text: #1e293b;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
-        }
-        /* Cadre téléphone sur grand écran quand le mode Mobile Preview est actif */
-        .phone-frame {
-            max-width: 430px;
-            margin: 1.5rem auto;
-            border: 10px solid #1e293b;
-            border-radius: 2.75rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            background: #f8fafc;
-            position: relative;
-        }
-        @media (max-width: 640px) {
-            .phone-frame {
-                max-width: 100%;
-                margin: 0;
-                border: none;
-                border-radius: 0;
-                box-shadow: none;
-            }
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding-bottom: 40px; }
+        header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; text-align: center; padding: 30px 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        header h1 { font-size: 1.5rem; margin-bottom: 5px; }
+        header p { font-size: 0.9rem; opacity: 0.9; }
+        .container { max-width: 500px; margin: 20px auto; padding: 0 15px; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card h2 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+        .service-item, .zone-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.95rem; }
+        .price { font-weight: bold; color: var(--accent); }
+        select, input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; margin-top: 5px; background: #fff; }
+        .btn-whatsapp { display: block; width: 100%; background-color: #25d366; color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); margin-top: 20px; }
+        .btn-momo { display: block; width: 100%; background-color: #ea580c; color: white; text-align: center; padding: 14px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 1rem; margin-top: 10px; border: none; cursor: pointer; }
+        .info-box { font-size: 0.85rem; color: #64748b; margin-top: 5px; }
     </style>
 </head>
-<body class="bg-slate-200 text-slate-800 antialiased min-h-screen flex flex-col">
+<body>
 
-    <!-- Barre d'outils ingénieur (Paul) : Permet de basculer entre Vue Mobile et Vue Plein Écran -->
-    <div class="bg-slate-900 text-white px-4 py-2.5 text-xs sm:text-sm flex flex-wrap items-center justify-between gap-2 sticky top-0 z-40 shadow-md">
-        <div class="flex items-center gap-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                Prototype Web App • Sans APK
-            </span>
-            <span class="hidden md:inline text-slate-400">Maquette interactive pour Lydie Kinésithérapie (Douala)</span>
-        </div>
-        <div class="flex items-center gap-2">
-            <button id="btnViewMobile" onclick="setViewport('mobile')" class="px-3 py-1.5 rounded-lg bg-teal-600 text-white font-medium flex items-center gap-1.5 transition">
-                <i data-lucide="smartphone" class="w-4 h-4"></i>
-                <span>Vue Mobile</span>
-            </button>
-            <button id="btnViewFull" onclick="setViewport('full')" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium flex items-center gap-1.5 transition">
-                <i data-lucide="monitor" class="w-4 h-4"></i>
-                <span>Plein Écran</span>
-            </button>
-        </div>
-    </div>
+    <header>
+        <h1>Lydie Kinésithérapie</h1>
+        <p>Soins professionnels & Rééducation à domicile à Douala</p>
+    </header>
 
-    <!-- Conteneur principal de l'application Web -->
-    <main id="appContainer" class="phone-frame w-full flex-1 flex flex-col bg-slate-50 transition-all duration-300">
+    <div class="container">
         
-        <!-- Encoche décorative mode téléphone (visible uniquement en vue mobile sur ordinateur) -->
-        <div id="phoneNotch" class="hidden sm:flex justify-center pt-2 pb-1 bg-teal-800">
-            <div class="w-24 h-4 bg-slate-900 rounded-full"></div>
-        </div>
-
-        <!-- 1. EN-TÊTE / HERO SECTION -->
-        <header class="bg-gradient-to-br from-teal-800 via-teal-700 to-emerald-700 text-white px-5 pt-5 pb-8 rounded-b-3xl shadow-lg relative overflow-hidden">
-            <!-- Motif décoratif subtil -->
-            <div class="absolute -right-8 -top-8 w-36 h-36 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
-            
-            <div class="flex items-center justify-between mb-5">
-                <div class="flex items-center gap-2 bg-white/15 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>Disponible à Douala</span>
-                </div>
-                <a href="#tarifs" class="text-xs text-teal-100 underline hover:text-white">Grille tarifaire</a>
+        <!-- Prestations -->
+        <div class="card">
+            <h2>📋 Prestations & Tarifs</h2>
+            <div class="service-item">
+                <span>Bilan & 1ère Séance</span>
+                <span class="price">15 000 FCFA</span>
             </div>
-
-            <div class="flex items-center gap-4">
-                <!-- Avatar / Photo de Lydie avec fallback propre -->
-                <div class="relative shrink-0">
-                    <img 
-                        src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=200&q=80" 
-                        onerror="this.onerror=null; this.src='https://placehold.co/120x120/0f766e/ffffff?text=Lydie';"
-                        alt="Lydie Kinésithérapeute" 
-                        class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-white/80 shadow-md bg-teal-900"
-                    >
-                    <span class="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-lg shadow" title="Praticienne vérifiée">
-                        <i data-lucide="badge-check" class="w-4 h-4"></i>
-                    </span>
-                </div>
-
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight leading-tight">
-                        Lydie Kinésithérapie
-                    </h1>
-                    <p class="text-teal-100 text-xs sm:text-sm mt-0.5 font-medium">
-                        Rééducation & Soins à domicile • Douala
-                    </p>
-                    <p class="text-teal-50/90 text-xs mt-2 leading-relaxed">
-                        Prise en charge personnalisée chez vous : traumatologie, neurologie, post-opératoire et douleurs articulaires.
-                    </p>
-                </div>
+            <div class="service-item">
+                <span>Séance de Suivi (45 min)</span>
+                <span class="price">12 000 FCFA</span>
             </div>
-
-            <!-- Badges de réassurance -->
-            <div class="grid grid-cols-3 gap-2 mt-5 pt-4 border-t border-white/15 text-center text-[11px] font-medium text-teal-50">
-                <div class="bg-white/10 rounded-xl py-2 px-1 flex flex-col items-center gap-1">
-                    <i data-lucide="award" class="w-4 h-4 text-emerald-300"></i>
-                    <span>Diplômée d'État</span>
-                </div>
-                <div class="bg-white/10 rounded-xl py-2 px-1 flex flex-col items-center gap-1">
-                    <i data-lucide="home" class="w-4 h-4 text-emerald-300"></i>
-                    <span>100% à Domicile</span>
-                </div>
-                <div class="bg-white/10 rounded-xl py-2 px-1 flex flex-col items-center gap-1">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-300"></i>
-                    <span>Orange / MoMo</span>
-                </div>
-            </div>
-        </header>
-
-        <!-- CORPS DU PARCOURS DE RÉSERVATION (4 ÉTAPES) -->
-        <div id="tarifs" class="px-4 py-6 space-y-6 flex-1 max-w-2xl mx-auto w-full">
-
-            <!-- ÉTAPE 1 : CHOIX DE LA PRESTATION -->
-            <section class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80">
-                <div class="flex items-center gap-2.5 mb-3.5">
-                    <span class="w-7 h-7 rounded-full bg-teal-600 text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
-                    <div>
-                        <h2 class="text-base font-bold text-slate-900">Choisissez votre soin</h2>
-                        <p class="text-xs text-slate-500">Sélectionnez la prestation adaptée à votre besoin</p>
-                    </div>
-                </div>
-
-                <div class="space-y-2.5" id="prestationsList">
-                    <!-- Option 1 -->
-                    <label class="block cursor-pointer">
-                        <input type="radio" name="prestation" value="15000" data-name="Bilan Kinésithérapique & 1ère séance" class="peer sr-only" checked onchange="updateSummary()">
-                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-teal-600 peer-checked:bg-teal-50/50 hover:border-teal-300 transition flex items-start justify-between gap-3">
-                            <div>
-                                <div class="font-semibold text-sm text-slate-900">Bilan Kiné & 1ère séance (45-60 min)</div>
-                                <div class="text-xs text-slate-500 mt-0.5">Évaluation clinique complète, tests manuels & premiers soins antalgiques.</div>
-                            </div>
-                            <span class="shrink-0 font-bold text-sm text-teal-700 bg-teal-100/80 px-2.5 py-1 rounded-lg">15 000 F</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 2 -->
-                    <label class="block cursor-pointer">
-                        <input type="radio" name="prestation" value="12000" data-name="Séance de Suivi (Trauma / Rhumato)" class="peer sr-only" onchange="updateSummary()">
-                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-teal-600 peer-checked:bg-teal-50/50 hover:border-teal-300 transition flex items-start justify-between gap-3">
-                            <div>
-                                <div class="font-semibold text-sm text-slate-900">Séance de Suivi (Trauma / Rhumato)</div>
-                                <div class="text-xs text-slate-500 mt-0.5">Douleurs dos/nuque, entorses, fractures, prothèses (45 min).</div>
-                            </div>
-                            <span class="shrink-0 font-bold text-sm text-teal-700 bg-teal-100/80 px-2.5 py-1 rounded-lg">12 000 F</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 3 -->
-                    <label class="block cursor-pointer">
-                        <input type="radio" name="prestation" value="15000" data-name="Séance de Suivi (Neurologie / Post-AVC)" class="peer sr-only" onchange="updateSummary()">
-                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-teal-600 peer-checked:bg-teal-50/50 hover:border-teal-300 transition flex items-start justify-between gap-3">
-                            <div>
-                                <div class="font-semibold text-sm text-slate-900">Séance de Suivi (Neurologie / Post-AVC)</div>
-                                <div class="text-xs text-slate-500 mt-0.5">Rééducation motrice, marche, équilibre et prévention des raideurs.</div>
-                            </div>
-                            <span class="shrink-0 font-bold text-sm text-teal-700 bg-teal-100/80 px-2.5 py-1 rounded-lg">15 000 F</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 4 -->
-                    <label class="block cursor-pointer">
-                        <input type="radio" name="prestation" value="55000" data-name="Forfait 5 Séances (Rééducation suivie)" class="peer sr-only" onchange="updateSummary()">
-                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-teal-600 peer-checked:bg-teal-50/50 hover:border-teal-300 transition flex items-start justify-between gap-3">
-                            <div>
-                                <div class="flex items-center gap-1.5">
-                                    <span class="font-semibold text-sm text-slate-900">Forfait 5 Séances</span>
-                                    <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">Avantageux</span>
-                                </div>
-                                <div class="text-xs text-slate-500 mt-0.5">Suivi régulier à tarif préférentiel pour une récupération optimale.</div>
-                            </div>
-                            <span class="shrink-0 font-bold text-sm text-teal-700 bg-teal-100/80 px-2.5 py-1 rounded-lg">55 000 F</span>
-                        </div>
-                    </label>
-
-                    <!-- Option 5 -->
-                    <label class="block cursor-pointer">
-                        <input type="radio" name="prestation" value="5000" data-name="Télé-rééducation & Programme WhatsApp" class="peer sr-only" onchange="updateSummary()">
-                        <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-teal-600 peer-checked:bg-teal-50/50 hover:border-teal-300 transition flex items-start justify-between gap-3">
-                            <div>
-                                <div class="font-semibold text-sm text-slate-900">Télé-rééducation & Exercices WhatsApp</div>
-                                <div class="text-xs text-slate-500 mt-0.5">Bilan vidéo 30 min + envoi d'un programme d'exercices personnalisés.</div>
-                            </div>
-                            <span class="shrink-0 font-bold text-sm text-teal-700 bg-teal-100/80 px-2.5 py-1 rounded-lg">5 000 F</span>
-                        </div>
-                    </label>
-                </div>
-            </section>
-
-            <!-- ÉTAPE 2 : QUARTIER À DOUALA -->
-            <section class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80">
-                <div class="flex items-center gap-2.5 mb-3.5">
-                    <span class="w-7 h-7 rounded-full bg-teal-600 text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
-                    <div>
-                        <h2 class="text-base font-bold text-slate-900">Votre quartier à Douala</h2>
-                        <p class="text-xs text-slate-500">Calcul automatique des frais de déplacement</p>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="relative">
-                        <select id="quartierSelect" onchange="updateSummary()" class="w-full appearance-none bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 block p-3.5 pr-10 font-medium">
-                            <optgroup label="Zone 1 — Secteurs Centraux (Déplacement inclus : 0 FCFA)">
-                                <option value="0" data-quartier="Akwa">Akwa (0 FCFA)</option>
-                                <option value="0" data-quartier="Bonapriso" selected>Bonapriso (0 FCFA)</option>
-                                <option value="0" data-quartier="Bali">Bali (0 FCFA)</option>
-                                <option value="0" data-quartier="Bonanjo">Bonanjo (0 FCFA)</option>
-                                <option value="0" data-quartier="Deïdo">Deïdo (0 FCFA)</option>
-                            </optgroup>
-                            <optgroup label="Zone 2 — Secteurs Intermédiaires (+ 2 000 FCFA)">
-                                <option value="2000" data-quartier="Makepe">Makepe (+ 2 000 FCFA)</option>
-                                <option value="2000" data-quartier="Bonamoussadi">Bonamoussadi (+ 2 000 FCFA)</option>
-                                <option value="2000" data-quartier="Logpom">Logpom (+ 2 000 FCFA)</option>
-                                <option value="2000" data-quartier="Kotto">Kotto (+ 2 000 FCFA)</option>
-                                <option value="2000" data-quartier="Bepanda">Bepanda (+ 2 000 FCFA)</option>
-                                <option value="2000" data-quartier="Ndogbong">Ndogbong (+ 2 000 FCFA)</option>
-                            </optgroup>
-                            <optgroup label="Zone 3 — Secteurs Éloignés (+ 3 000 FCFA)">
-                                <option value="3000" data-quartier="Bonabéri">Bonabéri (+ 3 000 FCFA)</option>
-                                <option value="3000" data-quartier="Japoma">Japoma (+ 3 000 FCFA)</option>
-                                <option value="3000" data-quartier="Yassa">Yassa (+ 3 000 FCFA)</option>
-                                <option value="3000" data-quartier="PK8 - PK14">PK8 - PK14 (+ 3 000 FCFA)</option>
-                            </optgroup>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-teal-600"></i>
-                        </div>
-                    </div>
-
-                    <div id="zoneBadge" class="flex items-center gap-2 text-xs bg-emerald-50 text-emerald-800 px-3 py-2 rounded-xl border border-emerald-200/70">
-                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-                        <span><strong>Zone 1 :</strong> Frais de déplacement offerts pour ce quartier.</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ÉTAPE 3 : INFORMATIONS PATIENT & CRÉNEAU -->
-            <section class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/80">
-                <div class="flex items-center gap-2.5 mb-3.5">
-                    <span class="w-7 h-7 rounded-full bg-teal-600 text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
-                    <div>
-                        <h2 class="text-base font-bold text-slate-900">Vos coordonnées & créneau</h2>
-                        <p class="text-xs text-slate-500">Pour préparer la venue de Lydie chez vous</p>
-                    </div>
-                </div>
-
-                <div class="space-y-3.5">
-                    <div>
-                        <label for="patientName" class="block text-xs font-semibold text-slate-700 mb-1">Nom complet du patient *</label>
-                        <input type="text" id="patientName" oninput="updateSummary()" placeholder="Ex: Jean-Marc Mbarga" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
-                    </div>
-
-                    <div>
-                        <label for="patientPhone" class="block text-xs font-semibold text-slate-700 mb-1">Numéro WhatsApp / Téléphone *</label>
-                        <div class="flex">
-                            <span class="inline-flex items-center px-3 text-sm text-slate-600 bg-slate-100 border border-r-0 border-slate-300 rounded-l-xl font-medium">
-                                🇨🇲 +237
-                            </span>
-                            <input type="tel" id="patientPhone" oninput="updateSummary()" placeholder="6 99 00 00 00" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-r-xl p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label for="bookingDate" class="block text-xs font-semibold text-slate-700 mb-1">Date souhaitée</label>
-                            <input type="date" id="bookingDate" onchange="updateSummary()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
-                        </div>
-                        <div>
-                            <label for="bookingSlot" class="block text-xs font-semibold text-slate-700 mb-1">Créneau horaire</label>
-                            <select id="bookingSlot" onchange="updateSummary()" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
-                                <option value="Matin (08h00 - 12h00)">Matin (08h - 12h)</option>
-                                <option value="Après-midi (13h00 - 17h00)" selected>Après-midi (13h - 17h)</option>
-                                <option value="Fin de journée (17h00 - 19h00)">Fin de journée (17h - 19h)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="patientMotif" class="block text-xs font-semibold text-slate-700 mb-1">Motif de consultation (facultatif)</label>
-                        <textarea id="patientMotif" rows="2" oninput="updateSummary()" placeholder="Ex: Douleur au bas du dos depuis 1 semaine, repère proche (ex: Carrefour...)..." class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl p-3 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"></textarea>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ÉTAPE 4 : RÉCAPITULATIF & PAIEMENT / WHATSAPP -->
-            <section class="bg-slate-900 text-white rounded-2xl p-5 shadow-lg">
-                <div class="flex items-center justify-between border-b border-slate-700/80 pb-3 mb-4">
-                    <div class="flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-full bg-teal-500 text-slate-950 text-xs font-extrabold flex items-center justify-center">4</span>
-                        <h2 class="text-base font-bold">Récapitulatif de la séance</h2>
-                    </div>
-                    <span id="paymentStatusBadge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                        Acompte en attente
-                    </span>
-                </div>
-
-                <!-- Détails chiffrés -->
-                <div class="space-y-2 text-sm mb-4">
-                    <div class="flex justify-between text-slate-300">
-                        <span id="summaryServiceName">Bilan Kiné & 1ère séance</span>
-                        <span id="summaryBasePrice" class="font-medium text-white">15 000 FCFA</span>
-                    </div>
-                    <div class="flex justify-between text-slate-300">
-                        <span>Déplacement (<span id="summaryQuartier">Bonapriso</span>)</span>
-                        <span id="summaryTravelFee" class="font-medium text-emerald-400">0 FCFA</span>
-                    </div>
-                    <div class="border-t border-slate-700/80 pt-2.5 mt-2.5 flex justify-between items-baseline">
-                        <span class="font-bold text-base">Total Séance</span>
-                        <span id="summaryTotal" class="text-xl font-extrabold text-teal-400">15 000 FCFA</span>
-                    </div>
-                </div>
-
-                <!-- Encart Acompte Mobile Money -->
-                <div class="bg-slate-800/90 border border-slate-700 rounded-xl p-3.5 mb-4 text-xs text-slate-300 leading-relaxed">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="font-bold text-white flex items-center gap-1.5">
-                            <i data-lucide="lock" class="w-3.5 h-3.5 text-orangeMoney"></i>
-                            Acompte de réservation requis :
-                        </span>
-                        <span class="font-extrabold text-sm text-orangeMoney">5 000 FCFA</span>
-                    </div>
-                    <p>Bloque définitivement le créneau de déplacement de Lydie. Le solde (<span id="summaryBalance">10 000 FCFA</span>) est réglé après la séance.</p>
-                </div>
-
-                <!-- Boutons d'action principaux -->
-                <div class="space-y-3">
-                    <!-- Bouton Paiement Orange Money / MTN MoMo -->
-                    <button type="button" onclick="openPaymentModal()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#FF7900] to-[#e66a00] hover:opacity-95 active:scale-[0.99] text-white font-bold text-sm shadow-lg shadow-orange-950/40 flex items-center justify-center gap-2.5 transition">
-                        <span class="bg-white text-[#FF7900] text-[10px] font-black px-1.5 py-0.5 rounded">OM / MoMo</span>
-                        <span>Payer l'acompte (5 000 FCFA)</span>
-                    </button>
-
-                    <!-- Bouton Envoi WhatsApp -->
-                    <button type="button" onclick="openWhatsAppPreview()" class="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.99] text-slate-950 font-bold text-sm shadow-lg flex items-center justify-center gap-2 transition">
-                        <i data-lucide="message-circle" class="w-5 h-5 fill-slate-950"></i>
-                        <span>Envoyer la demande sur WhatsApp</span>
-                    </button>
-                </div>
-
-                <p class="text-[11px] text-center text-slate-400 mt-3">
-                    Report gratuit jusqu'à 4h avant la séance • Reçu numérique automatique
-                </p>
-            </section>
-        </div>
-
-        <!-- PIED DE PAGE -->
-        <footer class="bg-white border-t border-slate-200 px-5 py-5 text-center text-xs text-slate-500">
-            <p class="font-bold text-slate-800">Lydie Kinésithérapie • Douala, Cameroun</p>
-            <p class="mt-1">Soins sur prescription médicale ou bilan kinésithérapique initial.</p>
-        </footer>
-    </main>
-
-    <!-- ===================================================================== -->
-    <!-- MODALE 1 : SIMULATION PAIEMENT ORANGE MONEY / MTN MOMO (CAMPAY/CINETPAY) -->
-    <!-- ===================================================================== -->
-    <div id="paymentModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl animate-fade-in">
-            <!-- Header agrégateur -->
-            <div class="bg-slate-900 text-white px-5 py-4 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                    <span class="font-bold text-sm">Paiement Mobile Sécurisé</span>
-                </div>
-                <button onclick="closePaymentModal()" class="text-slate-400 hover:text-white p-1">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-
-            <div class="p-5">
-                <!-- Montant et Bénéficiaire -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center mb-5">
-                    <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Compte Marchand Officiel</p>
-                    <p class="text-base font-extrabold text-slate-900 mt-0.5">LYDIE KINÉSITHÉRAPIE DOUALA</p>
-                    <div class="mt-2 pt-2 border-t border-slate-200 flex items-center justify-center gap-2">
-                        <span class="text-xs text-slate-500">Acompte à régler :</span>
-                        <span class="text-xl font-black text-[#FF7900]">5 000 FCFA</span>
-                    </div>
-                </div>
-
-                <!-- Choix opérateur Cameroun -->
-                <div id="paymentStepForm">
-                    <label class="block text-xs font-bold text-slate-700 mb-2">1. Choisissez votre opérateur :</label>
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <label class="cursor-pointer">
-                            <input type="radio" name="operator" value="Orange Money" class="peer sr-only" checked>
-                            <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-[#FF7900] peer-checked:bg-orange-50/60 flex items-center gap-2.5 transition">
-                                <div class="w-8 h-8 rounded-lg bg-[#FF7900] text-white font-black text-xs flex items-center justify-center shrink-0">OM</div>
-                                <div class="text-xs font-bold text-slate-800">Orange Money</div>
-                            </div>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="operator" value="MTN MoMo" class="peer sr-only">
-                            <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-[#FFCC00] peer-checked:bg-yellow-50/70 flex items-center gap-2.5 transition">
-                                <div class="w-8 h-8 rounded-lg bg-[#FFCC00] text-slate-900 font-black text-xs flex items-center justify-center shrink-0">MTN</div>
-                                <div class="text-xs font-bold text-slate-800">MTN MoMo</div>
-                            </div>
-                        </label>
-                    </div>
-
-                    <label class="block text-xs font-bold text-slate-700 mb-1.5">2. Numéro de téléphone payeur :</label>
-                    <div class="flex mb-4">
-                        <span class="inline-flex items-center px-3 text-sm text-slate-600 bg-slate-100 border border-r-0 border-slate-300 rounded-l-xl font-semibold">+237</span>
-                        <input type="tel" id="momoNumber" placeholder="6 9X XX XX XX" class="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-r-xl p-3 font-semibold focus:ring-2 focus:ring-[#FF7900] focus:border-[#FF7900]">
-                    </div>
-
-                    <button type="button" onclick="simulatePushUSSD()" class="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm transition flex items-center justify-center gap-2">
-                        <span>Lancer le paiement (5 000 FCFA)</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
-                </div>
-
-                <!-- État attente validation USSD (#150# / *126#) -->
-                <div id="paymentStepPending" class="hidden text-center py-4 space-y-3">
-                    <div class="w-12 h-12 rounded-full border-4 border-orange-200 border-t-[#FF7900] animate-spin mx-auto"></div>
-                    <h3 class="font-bold text-slate-900 text-base">Validation sur votre téléphone...</h3>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Un message USSD vient d'être envoyé sur le <strong id="displayMomoNum">+237 6...</strong>.<br>
-                        Composez <span class="font-mono font-bold bg-slate-100 px-1.5 py-0.5 rounded">#150#</span> (ou *126#) et entrez votre code secret pour valider.
-                    </p>
-                    <button type="button" onclick="confirmSimulatedPayment()" class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-lg hover:bg-emerald-100 transition">
-                        <i data-lucide="check" class="w-4 h-4"></i>
-                        <span>[Démo Paul] Simuler validation code PIN réussie</span>
-                    </button>
-                </div>
-
-                <!-- État Succès -->
-                <div id="paymentStepSuccess" class="hidden text-center py-3 space-y-3">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                        <i data-lucide="check-circle-2" class="w-9 h-9"></i>
-                    </div>
-                    <h3 class="font-extrabold text-slate-900 text-lg">Acompte de 5 000 FCFA reçu !</h3>
-                    <p class="text-xs text-slate-600">
-                        Réf. Transaction : <span class="font-mono font-bold text-slate-800">OM-DLA-84920</span><br>
-                        Votre créneau est réservé. Envoyez maintenant la confirmation sur le WhatsApp de Lydie.
-                    </p>
-                    <button type="button" onclick="closePaymentModal(); openWhatsAppPreview();" class="w-full py-3 rounded-xl bg-[#25D366] text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow">
-                        <i data-lucide="message-circle" class="w-5 h-5"></i>
-                        <span>Continuer vers WhatsApp</span>
-                    </button>
-                </div>
+            <div class="service-item">
+                <span>Forfait 5 Séances</span>
+                <span class="price">55 000 FCFA</span>
             </div>
         </div>
-    </div>
 
-    <!-- ===================================================================== -->
-    <!-- MODALE 2 : APERÇU DU MESSAGE WHATSAPP GÉNÉRÉ AUTOMATIQUEMENT          -->
-    <!-- ===================================================================== -->
-    <div id="whatsappModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl">
-            <div class="bg-[#075E54] text-white px-5 py-4 flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <i data-lucide="message-circle" class="w-5 h-5 text-[#25D366]"></i>
-                    <div>
-                        <h3 class="font-bold text-sm leading-tight">Lydie | Kinésithérapie</h3>
-                        <p class="text-[11px] text-emerald-200">Message pré-rempli prêt à envoyer</p>
-                    </div>
-                </div>
-                <button onclick="closeWhatsAppModal()" class="text-emerald-200 hover:text-white p-1">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-
-            <!-- Fond style discussion WhatsApp -->
-            <div class="bg-[#ECE5DD] p-4">
-                <div class="bg-[#DCF8C6] text-slate-800 rounded-2xl rounded-tr-none p-3.5 shadow-sm text-xs whitespace-pre-line leading-relaxed font-sans" id="whatsappMessagePreview">
-                    <!-- Rempli dynamiquement par JS -->
-                </div>
-            </div>
-
-            <div class="p-4 bg-white space-y-2.5">
-                <a id="realWhatsAppLink" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-sm flex items-center justify-center gap-2 shadow transition">
-                    <i data-lucide="send" class="w-4 h-4"></i>
-                    <span>Ouvrir WhatsApp et envoyer</span>
-                </a>
-                <button type="button" onclick="copyWhatsAppMessage()" id="btnCopyMsg" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
-                    Copier le texte du message
-                </button>
-            </div>
+        <!-- Zones et Quartiers -->
+        <div class="card">
+            <h2>📍 Votre Quartier à Douala</h2>
+            <label for="quartier" style="font-size: 0.9rem; font-weight: 600;">Sélectionnez votre secteur :</label>
+            <select id="quartier" onchange="calculerFrais()">
+                <option value="0">Zone 1 : Akwa, Bonapriso, Deido, Bali (Inclus)</option>
+                <option value="2000">Zone 2 : Makepe, Bonamoussadi, Kotto (+ 2 000 F)</option>
+                <option value="3000">Zone 3 : Bonabéri, Yassa, Japoma (+ 3 000 F)</option>
+            </select>
+            <p class="info-box" id="info-frais">Frais de déplacement : 0 FCFA</p>
         </div>
-    </div>
 
-    <!-- Boîte de notification légère (remplace alert()) -->
-    <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs font-medium px-4 py-2.5 rounded-full shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
-        Message copié !
+        <!-- Paiement Mobile Money -->
+        <div class="card">
+            <h2>🟠 Paiement Sécurisé</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 10px;">Réglez l'acompte de réservation via Orange Money / MTN MoMo :</p>
+            <button class="btn-momo" onclick="simulerPaiement()">Payer l'acompte (5 000 FCFA)</button>
+        </div>
+
+        <!-- Bouton WhatsApp -->
+        <a href="#" id="whatsapp-link" class="btn-whatsapp" onclick="envoyerWhatsApp(event)">💬 Réserver sur WhatsApp</a>
+
     </div>
 
     <script>
-        // Initialisation des icônes Lucide
-        lucide.createIcons();
-
-        // État global de la réservation
-        let bookingState = {
-            serviceName: "Bilan Kinésithérapique & 1ère séance",
-            basePrice: 15000,
-            quartier: "Bonapriso",
-            travelFee: 0,
-            totalPrice: 15000,
-            depositPaid: false,
-            paymentRef: ""
-        };
-
-        // Définir la date par défaut à demain
-        window.addEventListener('DOMContentLoaded', () => {
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('bookingDate').value = tomorrow.toISOString().split('T')[0];
-            updateSummary();
-        });
-
-        // Formater les nombres en FCFA (ex: 15 000 FCFA)
-        function formatFCFA(amount) {
-            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FCFA";
+        function calculerFrais() {
+            const select = document.getElementById('quartier');
+            const frais = select.value;
+            const info = document.getElementById('info-frais');
+            info.innerText = "Frais de déplacement : " + frais + " FCFA";
         }
 
-        // Basculer entre la vue Mobile (encadrée) et Plein Écran pour la démo
-        function setViewport(mode) {
-            const container = document.getElementById('appContainer');
-            const notch = document.getElementById('phoneNotch');
-            const btnMobile = document.getElementById('btnViewMobile');
-            const btnFull = document.getElementById('btnViewFull');
-
-            if (mode === 'mobile') {
-                container.classList.add('phone-frame');
-                notch.classList.remove('hidden');
-                notch.classList.add('sm:flex');
-                btnMobile.className = "px-3 py-1.5 rounded-lg bg-teal-600 text-white font-medium flex items-center gap-1.5 transition";
-                btnFull.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium flex items-center gap-1.5 transition";
-            } else {
-                container.classList.remove('phone-frame');
-                notch.classList.add('hidden');
-                notch.classList.remove('sm:flex');
-                btnFull.className = "px-3 py-1.5 rounded-lg bg-teal-600 text-white font-medium flex items-center gap-1.5 transition";
-                btnMobile.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium flex items-center gap-1.5 transition";
-            }
+        function simulerPaiement() {
+            alert("Simulation Orange Money / Campay : Redirection vers la passerelle de paiement sécurisée de l'acompte (5 000 FCFA).");
         }
 
-        // Mise à jour dynamique des tarifs et du récapitulatif
-        function updateSummary() {
-            const selectedRadio = document.querySelector('input[name="prestation"]:checked');
-            const quartierSelect = document.getElementById('quartierSelect');
-            const selectedOption = quartierSelect.options[quartierSelect.selectedIndex];
-
-            bookingState.basePrice = parseInt(selectedRadio.value, 10);
-            bookingState.serviceName = selectedRadio.getAttribute('data-name');
-            bookingState.travelFee = parseInt(selectedOption.value, 10);
-            bookingState.quartier = selectedOption.getAttribute('data-quartier');
-            bookingState.totalPrice = bookingState.basePrice + bookingState.travelFee;
-
-            // Mise à jour de l'encart info Zone
-            const zoneBadge = document.getElementById('zoneBadge');
-            if (bookingState.travelFee === 0) {
-                zoneBadge.className = "flex items-center gap-2 text-xs bg-emerald-50 text-emerald-800 px-3 py-2 rounded-xl border border-emerald-200/70";
-                zoneBadge.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0"></i><span><strong>Zone 1 :</strong> Frais de déplacement offerts pour ${bookingState.quartier}.</span>`;
-            } else {
-                zoneBadge.className = "flex items-center gap-2 text-xs bg-amber-50 text-amber-800 px-3 py-2 rounded-xl border border-amber-200/70";
-                zoneBadge.innerHTML = `<i data-lucide="navigation" class="w-4 h-4 text-amber-600 shrink-0"></i><span><strong>Supplément distance :</strong> + ${formatFCFA(bookingState.travelFee)} pour ${bookingState.quartier}.</span>`;
-            }
-            lucide.createIcons();
-
-            // Mise à jour du récapitulatif Étape 4
-            document.getElementById('summaryServiceName').textContent = bookingState.serviceName;
-            document.getElementById('summaryBasePrice').textContent = formatFCFA(bookingState.basePrice);
-            document.getElementById('summaryQuartier').textContent = bookingState.quartier;
-            document.getElementById('summaryTravelFee').textContent = bookingState.travelFee === 0 ? "0 FCFA (Inclus)" : "+ " + formatFCFA(bookingState.travelFee);
-            document.getElementById('summaryTotal').textContent = formatFCFA(bookingState.totalPrice);
-
-            const balance = Math.max(0, bookingState.totalPrice - 5000);
-            document.getElementById('summaryBalance').textContent = formatFCFA(balance);
-        }
-
-        // Gestion de la modale de paiement Orange Money / MTN MoMo
-        function openPaymentModal() {
-            const patientPhone = document.getElementById('patientPhone').value.trim();
-            if (patientPhone) {
-                document.getElementById('momoNumber').value = patientPhone;
-            }
-            document.getElementById('paymentStepForm').classList.remove('hidden');
-            document.getElementById('paymentStepPending').classList.add('hidden');
-            document.getElementById('paymentStepSuccess').classList.add('hidden');
-
-            const modal = document.getElementById('paymentModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closePaymentModal() {
-            const modal = document.getElementById('paymentModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function simulatePushUSSD() {
-            const num = document.getElementById('momoNumber').value.trim() || "6 99 00 00 00";
-            document.getElementById('displayMomoNum').textContent = "+237 " + num;
-            document.getElementById('paymentStepForm').classList.add('hidden');
-            document.getElementById('paymentStepPending').classList.remove('hidden');
-        }
-
-        function confirmSimulatedPayment() {
-            bookingState.depositPaid = true;
-            bookingState.paymentRef = "OM-DLA-" + Math.floor(10000 + Math.random() * 90000);
-
-            document.getElementById('paymentStepPending').classList.add('hidden');
-            document.getElementById('paymentStepSuccess').classList.remove('hidden');
-
-            // Mise à jour du badge dans l'étape 4
-            const badge = document.getElementById('paymentStatusBadge');
-            badge.className = "text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
-            badge.textContent = "Acompte 5 000 F Payé ✓";
-        }
-
-        // Génération et affichage du message WhatsApp
-        function openWhatsAppPreview() {
-            const name = document.getElementById('patientName').value.trim() || "Patient";
-            const phone = document.getElementById('patientPhone').value.trim() || "Non renseigné";
-            const dateVal = document.getElementById('bookingDate').value;
-            const slot = document.getElementById('bookingSlot').value;
-            const motif = document.getElementById('patientMotif').value.trim();
-
-            const formattedDate = dateVal ? new Date(dateVal).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }) : "À définir";
-
-            const statusText = bookingState.depositPaid
-                ? `✅ Acompte de 5 000 FCFA PAYÉ (Réf: ${bookingState.paymentRef})`
-                : `⏳ Acompte de 5 000 FCFA à régler via Orange Money`;
-
-            let message = `Bonjour Lydie 👋,\nJe souhaite réserver une séance de kinésithérapie à domicile à Douala :\n\n`;
-            message += `👤 *Patient :* ${name}\n`;
-            message += `📞 *Tél :* +237 ${phone}\n`;
-            message += `🩺 *Soin :* ${bookingState.serviceName}\n`;
-            message += `📍 *Quartier :* ${bookingState.quartier}\n`;
-            message += `📅 *Créneau :* ${formattedDate} — ${slot}\n`;
-            if (motif) {
-                message += `📝 *Motif / Repère :* ${motif}\n`;
-            }
-            message += `\n💰 *Total séance :* ${formatFCFA(bookingState.totalPrice)}\n`;
-            message += `💳 *Statut :* ${statusText}`;
-
-            document.getElementById('whatsappMessagePreview').textContent = message;
-
-            // Lien wa.me officiel (Paul remplacera 237600000000 par le vrai numéro WhatsApp Business de Lydie)
-            const encodedMsg = encodeURIComponent(message);
-            document.getElementById('realWhatsAppLink').href = `https://wa.me/237600000000?text=${encodedMsg}`;
-
-            const modal = document.getElementById('whatsappModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeWhatsAppModal() {
-            const modal = document.getElementById('whatsappModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function copyWhatsAppMessage() {
-            const text = document.getElementById('whatsappMessagePreview').textContent;
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-
-            const toast = document.getElementById('toastNotification');
-            toast.classList.remove('opacity-0');
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-            }, 2500);
+        function envoyerWhatsApp(e) {
+            e.preventDefault();
+            const quartierSelect = document.getElementById('quartier');
+            const quartierNom = quartierSelect.options[quartierSelect.selectedIndex].text;
+            
+            // Remplace par le vrai numéro WhatsApp de Lydie au format international sans le + (ex: 2376xxxxxxxx)
+            const numeroWhatsApp = "237600000000"; 
+            
+            const message = `Bonjour Lydie, je souhaite réserver une séance de kinésithérapie.\n- Quartier : ${quartierNom}`;
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
         }
     </script>
 </body>
